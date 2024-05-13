@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import Sidebar from '@/layout/components/Sidebar/index.vue'
 import AppMain from '@/layout/components/AppMain.vue'
-import NavBar from '@/layout/components/NavBar.vue'
+import NavBar from '@/layout/components/Navbar.vue'
 </script>
 
 <style lang="scss" coped>

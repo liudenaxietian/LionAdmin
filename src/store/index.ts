@@ -1,10 +1,10 @@
-import { createStore } from "vuex"
-import user from "./modules/user.ts"
-import getters from "./getter.ts"
+import { createStore } from 'vuex'
+import user from './modules/user'
+import getters from './getter'
 
 export default createStore({
-    getters,
-    modules: {
-        user,
-    }
+  getters,
+  modules: {
+    user
+  }
 })
