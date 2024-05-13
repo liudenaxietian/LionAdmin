@@ -18,7 +18,9 @@
             <a target="_blank" href="">
               <el-dropdown-item>课程主页</el-dropdown-item>
             </a>
-            <el-dropdown-item divided @click="handleLogout"> 退出登录 </el-dropdown-item>
+            <el-dropdown-item divided @click="handleLogout">
+              退出登录
+            </el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
@@ -28,13 +30,16 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useStore } from 'vuex'
+
+
 const avatar = ref(
   'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'
 )
-const store = useStore();
+const store = useStore()
 
-const handleLogout = ()=>{
-  store.dispatch("user/logout");
+const handleLogout = () => {
+  store.dispatch('user/logout')
 }
 </script>
 
