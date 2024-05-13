@@ -1,13 +1,7 @@
 <template>
-    <div>
-        sidebar
-    </div>
+  <div>sidebar</div>
 </template>
 
-<script setup lang="ts" name="Sidebar">
+<script setup lang="ts"></script>
 
-</script>
-
-<style scoped>
-
-</style>
+<style lang="scss" scoped></style>

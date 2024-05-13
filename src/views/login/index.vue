@@ -35,7 +35,7 @@
   </div>
 </template>
 
-<script setup name="login"></script>
+<script setup></script>
 
 <style lang="scss" scoped>
 $bg: #2d3a4b;

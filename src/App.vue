@@ -1,12 +1,12 @@
-<script setup lang="ts">
-// import login from './views/other/index.vue'
-import layout from './layout/index.vue'
-</script>
-
 <template>
   <!-- <login /> -->
   <layout />
 </template>
+
+<script setup>
+// import login from './views/other/index.vue'
+import layout from '@/layout/index.vue'
+</script>
 
 <style scoped>
 .logo {
