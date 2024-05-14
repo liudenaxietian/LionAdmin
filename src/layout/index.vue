@@ -14,7 +14,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import Sidebar from '@/layout/components/Sidebar/index.vue'
 import AppMain from '@/layout/components/AppMain.vue'
 import NavBar from '@/layout/components/Navbar.vue'
@@ -35,7 +35,7 @@ import NavBar from '@/layout/components/Navbar.vue'
   top: 0px;
   right: 0px;
   z-index: 9999;
-  width: calc(100%);
+  width: 100%;
   background-color: aquamarine;
 }
 </style>

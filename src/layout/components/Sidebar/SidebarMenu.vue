@@ -3,39 +3,112 @@
   <el-menu
     :uniqueOpened="true"
     default-active="2"
-    background-color="#545c64"
+    background-color="$store.getters.cssVar.menBg"
     text-color="#fff"
     active-text-color="#ffd04b"
   >
-    <!-- 子集 menu 菜单 -->
-    <el-submenu index="1">
-      <template #title>
-        <i class="el-icon-location"></i>
-        <span>导航一</span>
-      </template>
-      <el-menu-item index="1-1">选项1</el-menu-item>
-      <el-menu-item index="1-2">选项2</el-menu-item>
-    </el-submenu>
-    <!-- 具体菜单项 -->
-    <el-menu-item index="4">
-      <i class="el-icon-setting"></i>
-      <template #title>导航四</template>
-    </el-menu-item>
+    <sidebar-item
+      v-for="item in routes"
+      :key="item.path"
+      :route="item"
+    ></sidebar-item>
   </el-menu>
 </template>
 
 <script setup>
-import { filterRouters, generateMenus } from '@/utils/route'
-import { computed } from 'vue'
-import { useRouter } from 'vue-router'
+import SidebarItem from './SidebarItem.vue'
+// import { filterRoutes } from '@/utils/route.ts'
 
-const router = useRouter()
-// console.log('232', router.getRoutes())
-const routes = computed(() => {
-  const filterRoutes = filterRouters(router.getRoutes())
-  return generateMenus(filterRouters)
-})
-console.log(JSON.stringify(routes.value))
+// const router = useRouter()
+// // console.log('232', router.getRoutes())
+// const routes = computed(() => {
+//   const filterRoutes = filterRouters(router.getRoutes())
+//   return generateMenus(filterRouters)
+// })
+
+const routes = [
+  {
+    path: '/profile',
+    name: 'profile',
+    meta: {
+      title: 'profile',
+      icon: 'el-icon-user'
+    }
+  },
+  {
+    path: '/user',
+    redirect: '/user/manage',
+    meta: {
+      title: 'user',
+      icon: 'personnel'
+    },
+    props: {
+      default: false
+    },
+    children: [
+      {
+        path: '/user/manage',
+        name: 'userManage',
+        meta: {
+          title: 'userManage',
+          icon: 'personnel-manage'
+        },
+        children: []
+      },
+      {
+        path: '/user/role',
+        name: 'userRole',
+        meta: {
+          title: 'roleList',
+          icon: 'role'
+        },
+        children: []
+      },
+      {
+        path: '/user/permission',
+        name: 'userPermission',
+        meta: {
+          title: 'permissionList',
+          icon: 'permission'
+        },
+        children: []
+      }
+    ]
+  },
+  {
+    path: '/article',
+    redirect: '/article/ranking',
+    meta: {
+      title: 'article',
+      icon: 'article'
+    },
+    props: {
+      default: false
+    },
+    children: [
+      {
+        path: '/article/ranking',
+        name: 'articleRanking',
+        meta: {
+          title: 'articleRanking',
+          icon: 'article-ranking'
+        },
+        children: []
+      },
+      {
+        path: '/article/create',
+        name: 'articleCreate',
+        meta: {
+          title: 'articleCreate',
+          icon: 'article-create'
+        },
+        children: []
+      }
+    ]
+  }
+]
+// const routes = filterRoutes
+// console.log(filterRoutes)
 </script>
 
 <style lang="scss" scoped></style>

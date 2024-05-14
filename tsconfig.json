@@ -14,10 +14,20 @@
     "sourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": [
+        "src/*"
+      ],
+      "tslib" : ["path/to/node_modules/tslib/tslib.d.ts"]
     },
-    "types": ["webpack-env"],
-    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+    "types": [
+      "webpack-env"
+    ],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
   },
   "include": [
     "src/**/*.ts",
@@ -25,6 +35,8 @@
     "src/**/*.vue",
     "tests/**/*.ts",
     "tests/**/*.tsx"
-  ],
-  "exclude": ["node_modules"]
+, "src/utils/route.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

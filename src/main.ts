@@ -10,7 +10,12 @@ import store from '@/store/index'
 
 axios.defaults.withCredentials = true
 
+
+
+
 const app = createApp(App)
+
+app.prototype.$store = store
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component)
