@@ -1,138 +1,101 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+/*
+ * @Author: Lion
+ * @Date: 2023-12-18 14:28:36
+ * @LastEditors: 
+ * @LastEditTime: 2024-03-28 16:27:32
+ * @Description: 
+ */
+import { createRouter, createWebHistory } from "vue-router"
 
-import layout from '@/layout/index.vue'
+import Layout from '@/layout/index.vue'
+import Main from '@/layout/components/AppMain.vue'
+import MySpace from "@/components/myspace/index.vue"
+import UserInfo from "@/components/userinfo/index.vue"
+import MyCircle from "@/components/myFriends/index.vue"
+import Express from "@/components/express/index.vue"
+import Discuss from "@/components/discuss/index.vue"
+import MyActive from "@/components/activity/index.vue"
+import ShowExpress from "@/components/showExpress/index.vue"
 
-const publicRoutes = [
+const routes = [
   {
-    path: '/login',
-    component: () => import('@/views/login/index.vue')
-  },
-  {
-    path: '/',
-    component: layout,
-    redirect: '/profile',
+    path: "/",
+    name: "Layout",
+    component: Layout,
+    redirect: "/main",
     children: [
       {
-        path: '/profile',
-        name: 'profile',
-        component: () => import('@/views/profile/index.vue'),
-        meta: {
-          title: 'profile',
-          icon: 'el-icon-user'
-        }
-      }
-      // {
-      //   path: '/404',
-      //   name: '404',
-      //   component: () => import('@/views/error-page/404.vue')
-      // },
-      // {
-      //   path: '/401',
-      //   name: '401',
-      //   component: () => import('@/views/error-page/401.vue')
-      // }
-    ]
-  }
-]
-
-const privateRoutes = [
-  {
-    path: '/user',
-    component: layout,
-    redirect: '/user/manage',
-    meta: {
-      title: 'user',
-      icon: 'personnel'
-    },
-    children: [
-      {
-        path: '/user/manage',
-        component: () => import('@/views/user-manage/index.vue'),
-        meta: {
-          title: 'userManage',
-          icon: 'personnel-manage'
-        }
+        path: '/main',
+        name: 'Main',
+        component: Main
       },
       {
-        path: '/user/role',
-        component: () => import('@/views/role-list/index.vue'),
-        meta: {
-          title: 'roleList',
-          icon: 'role'
-        }
+        path: '/myspace',
+        name: 'MySpace',
+        component: MySpace
       },
       {
-        path: '/user/permission',
-        component: () => import('@/views/permission-list/index.vue'),
-        meta: {
-          title: 'permissionList',
-          icon: 'permission'
-        }
+        path: '/userinfo',
+        name: 'UserInfo',
+        component: UserInfo
       },
       {
-        path: '/user/info/:id',
-        name: 'userInfo',
-        component: () => import('@/views/user-info/index.vue'),
-        meta: {
-          title: 'userInfo'
-        }
+        path: '/mycircle',
+        name: 'MyCircle',
+        component: MyCircle
       },
       {
-        path: '/user/import',
-        name: 'import',
-        component: () => import('@/views/import/index.vue'),
-        meta: {
-          title: 'excelImport'
-        }
-      }
+        path: '/express',
+        name: 'Express',
+        component: Express
+      },
+      {
+        path: '/discuss',
+        name: 'Discuss',
+        component: Discuss
+      },
+      {
+        path: '/active',
+        name: 'Active',
+        component: MyActive
+      },
+      {
+        path: '/showExpress:id',
+        name: 'ShowExpress',
+        component: ShowExpress
+      },
     ]
   },
-  {
-    path: '/article',
-    component: layout,
-    redirect: '/article/ranking',
-    meta: {
-      title: 'article',
-      icon: 'article'
-    },
-    children: [
-      {
-        path: '/article/ranking',
-        component: () => import('@/views/article-ranking/index.vue'),
-        meta: {
-          title: 'articleRanking',
-          icon: 'article-ranking'
-        }
-      },
-      {
-        path: '/article/:id',
-        component: () => import('@/views/article-detail/index.vue'),
-        meta: {
-          title: 'articleDetail'
-        }
-      },
-      {
-        path: '/article/create',
-        component: () => import('@/views/article-create/index.vue'),
-        meta: {
-          title: 'articleCreate',
-          icon: 'article-create'
-        }
-      },
-      {
-        path: '/article/editor/:id',
-        component: () => import('@/views/article-create/index.vue'),
-        meta: {
-          title: 'articleEditor'
-        }
-      }
-    ]
-  }
+  // {
+  //     path: "/myspace",
+  //     component: MySpace,
+  // },
+  // {
+  //     path: "/userinfo",
+  //     component: UserInfo,
+  // },
+  // {
+  //     path: "/mycircle",
+  //     component: MyCircle,
+  // },
+  // {
+  //     path: "/express",
+  //     component: Express,
+  // },
+  // {
+  //     path: "/discuss",
+  //     component: Discuss,
+  // },
+  // {
+  //     path: "/checkIn",
+  //     component: MyCheckIn,
+  // }
 ]
+
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes: [...publicRoutes, ...privateRoutes]
+  history: createWebHistory(),
+  routes,
 })
 
-export default router
+export default router;

@@ -1,54 +1,70 @@
-import { login, getUserInfo } from '@/api/sys'
-import { getItem, removeAllItem, setItem } from '@/utils/storage'
-import md5 from 'md5'
-import { TOKEN } from '@/constant'
-import router from '@/router'
-import { setTimeStamp } from '@/utils/auth'
+/*
+ * @Author: Lion
+ * @Date: 2023-12-18 15:28:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2024-03-29 11:30:49
+ * @Description: 
+ */
+/*
+ * @Author: Lion
+ * @Date: 2023-12-18 15:28:21
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2023-12-20 10:49:33
+ * @Description: 
+ */
+import { defineStore } from "pinia"
+import { userType } from "@/interface/index"
+import { LogIn } from "@/api/index";
+import { removeToken, setToken } from "@/utils/token";
+import { store } from "@/store";
 
-export default {
-  namespace: true,
-  state: () => ({
-    token: getItem(TOKEN) || '',
-    userInfo: {}
-  }),
-  mutations: {
-    setToken(state: any, token: string) {
-      state.token = token
-      setItem(TOKEN, token)
-    },
-    setUserInfo(state: any, userInfo: any) {
-      state.userInfo = userInfo
-    }
-  },
-  actions: {
-    async login(context: any, userInfo: any) {
-      const { username, password } = userInfo
-      return new Promise((resolve, reject) => {
-        login({
-          username,
-          password: md5(password)
-        })
-          .then((data) => {
-            context.commit('/user/login', data.data.data.token)
-            setTimeStamp()
-            resolve(data)
-          })
-          .catch((err) => {
-            reject(err)
-          })
-      })
-    },
 
-    async getUserInfo(context: any) {
-      const res = await getUserInfo()
-      context.commit('/user/setUserInfo', res)
-      return res
-    },
-    logout(context: any) {
-      context.commit('/user/setToken', '')
-      context.commit('/user/setUserInfo', {})
-      removeAllItem()
-      router.push('/login')
+export const useUserStore = defineStore({
+    id: "user",
+    state: (): userType => ({
+        username: "",
+        jobnum: "",
+        title: "",
+        avatar: "",
+        isAdmin: false,
+    }),
+    actions: {
+        SET_USERNAME(username: string) {
+            this.username = username;
+        },
+        SET_USERJOBNUM(jobnum: string) {
+            this.jobnum = jobnum;
+        },
+        SET_USERAVATAR(avatar: string) {
+            this.avatar = avatar;
+        },
+        SET_USERTITLE(title: string) {
+            this.title = title;
+        },
+        SET_USERROLES(roles: boolean) {
+            this.isAdmin = roles;
+        },
+        async loginByUserName(data: any) {
+            const res = await LogIn(data);
+            if (res.code == 0) {
+                //返回token并设置Token
+                setToken(res.data.token)
+                return res.data
+            } else {
+                return
+            }
+        },
+        logOut() {
+            this.username = "";
+            this.isAdmin = false;
+            removeToken();
+            //重置路由
+
+            //返回登录界面
+        },
     }
-  }
+})
+
+export function useUserStoreHooks() {
+    return useUserStore(store);
 }

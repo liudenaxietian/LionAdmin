@@ -3,7 +3,7 @@
   <el-menu
     :uniqueOpened="true"
     default-active="2"
-    background-color="$store.getters.cssVar.menBg"
+    background-color="#e2e2e2"
     text-color="#fff"
     active-text-color="#ffd04b"
   >

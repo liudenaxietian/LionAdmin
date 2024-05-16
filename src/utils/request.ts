@@ -1,7 +1,7 @@
 import axios from "axios"
-import store from "@/store"
+// import store from "@/store/index"
 import { ElMessage } from "element-plus"
-import { isCheckTimeout } from "./auth"
+// import { isCheckTimeout } from "./auth"
 
 const service = axios.create({
     baseURL: process.env.VUE_APP_BASE_API,
@@ -10,13 +10,13 @@ const service = axios.create({
 
 service.interceptors.request.use(
     config => {
-        if (store.getters.token) {
-            if (isCheckTimeout()) {
-                store.dispatch("user/logout");
-                return Promise.reject(new Error("token 失效"))
-            }
-            config.headers.Authorization = `Bearer${store.getters.token}`
-        }
+        // if (store.getters.token) {
+        //     if (isCheckTimeout()) {
+        //         store.dispatch("user/logout");
+        //         return Promise.reject(new Error("token 失效"))
+        //     }
+        //     config.headers.Authorization = `Bearer${store.getters.token}`
+        // }
         return config;
     },
     error => {
@@ -42,7 +42,7 @@ service.interceptors.response.use(
             error.response.data.code === 401
         ){
             //token超时,退出登录
-            store.dispatch('user/logout');
+            // store.dispatch('user/logout');
         }
         ElMessage.error(error.message); //提示错误信息
         return Promise.reject(error);
